@@ -1,3 +1,12 @@
+# ALL GLORY TO MY LORD AND SAVIOR JESUS CHRIST FOR ALL HE HAS DONE!
+# ALL GLORY TO JESUS CHRIST WHO IS THE ONLY ALMIGHTY GOD! FOR ALL Success HE GIFTS ME WITH
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.contrib.auth import authenticate, login
+
+
 def add_to_cart(request):
     if request.method == 'POST':
         user = request.user
@@ -10,10 +19,10 @@ def add_to_cart(request):
         product = get_object_or_404(Product, pk=product_id)
 
         cart.products.add(product, through_defaults={'quantity': quantity})
-        
+
         message = 'Your Product has successfully been added to cart'
         return redirect('cart_detail', message)
-    
+
 def remove_from_cart(request):
     if request.method == 'POST':
         user = request.user
@@ -33,7 +42,7 @@ def remove_from_cart(request):
 
         message = 'The Product has been successfully removed from cart'
         return redirect('cart_detail', message)
-    
+
 def cart_view(request):
     cart = Cart.objects.filter(user=request.user).first()
     if cart:
@@ -42,7 +51,7 @@ def cart_view(request):
         return render(request, 'cart_detail.html', {'cart_items': cart_items})
     else:
         return render(request, 'empty_cart.hmtl')
-    
+
 def cart_checkout_view(request):
     user = request.user
     cart = Cart.objects.filter(user=user).first()
@@ -93,7 +102,7 @@ def create_account_view(request):
     if form.is_valid():
         form.save()
         return redirect('account_view')
-    
+
     context = {
         'form': form,
         'title': 'Create Account'
@@ -108,4 +117,8 @@ def account_view(request):
         'title': 'Account'
     }
     return render(request, 'account_view.html', context)
+
+
+
+
 
